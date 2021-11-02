@@ -1,7 +1,7 @@
 function grating_gen()
 % grating_gen.m
 % Generates a grating image given an image resolution and spatial frequency
-full_im_name = '.\Grating Images\test72.png';
+full_im_name = '.\Grating Images\test00.png';
 N_x = 1080; %Resolution of image in pixels
 aspect_ratio = 16/9;
 N_y = aspect_ratio*N_x;

@@ -2,15 +2,19 @@ function im_analyze5()
 % im_analyze4.m
 % clear
 % -------------- Program Variables --------------------------------%
-im_dir = 'Trial 32_8\';   % Folder where images or video are stored
+% im_dir = 'Trial 32_8/';   % Folder where images or video are stored
+im_dir = 'Test_2021-10-22/';
+
+% im_dir = '/Users/yeonsu/Dropbox (Harvard University)/Oscillator/Experiment/2021-10-20/';
 % im_dir = 'Nov 6\';
-% im_list = 'All';        % Images or frames to read. 1st image sets reference plane
-im_list = [10:30];  
+im_list = 'All';        % Images or frames to read. 1st image sets reference plane
+% im_list = [10:30];  
+% im_list = [29:30];
 plots_on = 2;           	% Generate diagnostic plots
 
 % ----------- Experimental Parameters -----------------------------%
-L_0 = (28+4)*25.4;      % Distance from object to camera & projector: mm
-D = 4.75*25.4;             % Distance from camera to projector: mm
+L_0 = 300;      % Distance from object to camera & projector: mm
+D = 50;             % Distance from camera to projector: mm
 % f_0 = 13.5/25.4;        % Fundamental frequency of observed grating, gratings/mm
 % pixel_pitch = 190/25.4;	% pixels / mm
 pixel_pitch = 6.59;         % Trial 30 -- pixels / mm
@@ -18,8 +22,14 @@ pixel_pitch = 6.59;         % Trial 30 -- pixels / mm
 
 
 % -------- Data analysis variables -----------------------------%
-ROI = [200, 90, 1050, 990];	% X Start (1st column), Y start (1st row),
+ROI = 'off';
+% ROI = [500, 1500, 2500,2500];
+% ROI = [50, 50, 1900, 1000];
+% ROI = [200, 90, 1050, 990];	% X Start (1st column), Y start (1st row),
 %                          	% X End (last column), Y end (last row)
+
+
+
 % ROI = 'off';
 rotate_on = 0;      % 0 if gratings are horizontal (default), 1 rotates images
 high_pass_wid = 80;         % Width of high pass gaussian filter
@@ -45,7 +55,12 @@ else
     end
     num_images = length(im_list);
     for i = 1:num_images
-        im(i).image = imread(strcat(im_dir, files(im_list(i)+2).name));  
+        raw = imread(strcat(im_dir, files(im_list(i)+2).name));
+        if ~ismatrix(raw)
+            im(i).image = rgb2gray(raw);  
+        else
+            im(i).image = raw;
+        end        
         im(i).name = files(im_list(i)+2).name;
     end
     

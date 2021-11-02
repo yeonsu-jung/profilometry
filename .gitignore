@@ -1,3 +1,7 @@
+# data outputs
+Test*/*.tif
+*.png
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
